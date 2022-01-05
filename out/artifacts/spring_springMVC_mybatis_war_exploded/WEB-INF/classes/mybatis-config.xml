@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--一些常用的设置属性：https://mybatis.org/mybatis-3/zh/configuration.html#settings-->
+    <settings>
+        <!--允许缓存-->
+        <setting name="cacheEnabled" value="ture"/>
+        <!--开启懒加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--开启驼峰命名转换-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--使用LOG4J日志-->
+        <setting name="logImpl" value="LOG4J"/>
+        <!--标志的日志工厂实现-->
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
+    </settings>
+
+    <!--给全限定名的实体类设置别名，便于编写sql时简化-->
+    <typeAliases>
+        <!--type为对应全限定名的类，alias为别名-->
+        <package name="com.ssm.entity"/>
+    </typeAliases>
+
+    <!--实体类和xml文件的映射器，每个实体类都需要注册一个-->
+    <!--<mappers>-->
+        <!--&lt;!&ndash;类名注册：接口和xml文件同名且在同一个包下才能这么使用，使用注解开发是也用这种方式映射&ndash;&gt;-->
+        <!--<mapper class="com.ssm.dao.bookMapper"/>-->
+    <!--</mappers>-->
+
+</configuration>
