@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       https://www.springframework.org/schema/context/spring-context.xsd">
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--进行包扫描注册bean-->
     <context:component-scan base-package="com.ssm.service"/>
     <!--开启注解支持-->
     <context:annotation-config/>
+    <!--开启aop注解支持-->
+    <aop:aspectj-autoproxy/>
+
+    <!--配置声明式事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <constructor-arg ref="dataSource" />
+    </bean>
+
+    <!--结合aop实现事务织入-->
+    <tx:advice id="txadvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--七种事务传播特性-->
+            <!--<tx:method name="add" propagation="REQUIRED"/>-->
+            <!--<tx:method name="update"/>-->
+            <!--<tx:method name="delete"/>-->
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--配置事务切入-->
+    <aop:config>
+        <aop:pointcut id="txPointCut" expression="execution(* com.ssm.dao.*.*(..))"/>
+        <aop:advisor pointcut-ref="txPointCut" advice-ref="txadvice"/>
+    </aop:config>
 
 </beans>
