@@ -13,7 +13,16 @@ public class bookServiceImpl implements bookService {
     @Setter
     @Autowired
     private bookMapper bookMapper;
+
     public List<Books> queryAllBooks() {
         return bookMapper.queryAllBooks();
+    }
+
+    public Books queryBookById(int bookId) {
+        return bookMapper.queryBookById(bookId);
+    }
+
+    public int insertBook(Books books) {
+        return bookMapper.insertBook(books);
     }
 }

@@ -16,9 +16,18 @@ public class bookMapperImpl implements bookMapper {
     @Autowired
     private SqlSessionTemplate sqlSession;
 
+    public int insertBook(Books books) {
+        return sqlSession.getMapper(bookMapper.class).insertBook(books);
+    }
+
     private Logger LOGGER = Logger.getLogger(this.getClass().toString());
+
     public List<Books> queryAllBooks() {
         LOGGER.info("执行queryAllBooks方法");
         return sqlSession.getMapper(bookMapper.class).queryAllBooks();
+    }
+
+    public Books queryBookById(int bookId) {
+        return sqlSession.getMapper(bookMapper.class).queryBookById(bookId);
     }
 }

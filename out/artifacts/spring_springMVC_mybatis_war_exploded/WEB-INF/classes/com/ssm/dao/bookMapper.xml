@@ -8,4 +8,12 @@
         select * from smbms.books
     </select>
 
+    <select id="queryBookById" parameterType="int" resultType="books">
+        select * from smbms.books where bookId=#{bookId};
+    </select>
+
+    <insert id="insertBook" parameterType="books">
+        insert into smbms.books(bookName, detail) VALUES (#{bookName},#{detail});
+    </insert>
+
 </mapper>

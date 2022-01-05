@@ -5,5 +5,6 @@
   </head>
   <body>
 <a href="${pageContext.request.contextPath}/books/allbooks">进入书籍页面</a>
+<a href="${pageContext.request.contextPath}/books/querybookbyid/">通过Id查询书籍</a>
   </body>
 </html>
